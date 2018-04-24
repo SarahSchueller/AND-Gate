@@ -4,13 +4,8 @@ __author__ = "Sarah Schüller"
 class LogFunc:                      # Klassendeklaration
     def __init__ (self):            # Attribute definieren    
     #sets all values to false for initilization
-<<<<<<< HEAD
         self.__Input0 = False
         self.__Input1 = False
-=======
-        self._Input0 = False
-        self._Input1 = False
->>>>>>> 2c6822c6778c2000a9f32333a4dabd97fa2757df
         self._Output = False
         self._Name = "YaAndGate"
 
@@ -23,13 +18,8 @@ class LogFunc:                      # Klassendeklaration
         print(first_last)
         print(format_string.format("Name", self._Name))
         print(format_string.format("Type", type(self).__name__))
-<<<<<<< HEAD
         print(format_string.format("Input0", str(self.__Input0)))
         print(format_string.format("Input1", str(self.__Input1)))
-=======
-        print(format_string.format("Input0", str(self._Input0)))
-        print(format_string.format("Input1", str(self._Input1)))
->>>>>>> 2c6822c6778c2000a9f32333a4dabd97fa2757df
         print(format_string.format("Output", str(self._Output)))
         print(first_last)
 
@@ -54,11 +44,7 @@ class LogFunc:                      # Klassendeklaration
     
     @property
     def Input0(self):
-<<<<<<< HEAD
         return self.__Input0
-=======
-        return self._Input0
->>>>>>> 2c6822c6778c2000a9f32333a4dabd97fa2757df
     
     @Input0.setter
     def Input0(self, Input0):
@@ -92,13 +78,8 @@ class AndGate(LogFunc):
     def execute(self):
     # checks if both iputs are true
         self._Output = False
-<<<<<<< HEAD
         if self.__Input0 == True:
             if self.__Input1 == True:
-=======
-        if self._Input0 == True:
-            if self._Input1 == True:
->>>>>>> 2c6822c6778c2000a9f32333a4dabd97fa2757df
                 self._Output = True
 
  
@@ -107,14 +88,8 @@ class OrGate(LogFunc):
     def execute(self):
     # checks if one of the Iputs is true
         self._Output = False
-<<<<<<< HEAD
         if self.__Input0 == True:
             self._Output = True
         elif self.__Input1 == True:
-=======
-        if self._Input0 == True:
-            self._Output = True
-        elif self._Input1 == True:
->>>>>>> 2c6822c6778c2000a9f32333a4dabd97fa2757df
             self._Output = True
 
