@@ -4,8 +4,8 @@ __author__ = "Sarah Schüller"
 class LogFunc:                      # Klassendeklaration
     def __init__ (self):            # Attribute definieren    
     #sets all values to false for initilization
-        self._Input0 = False
-        self._Input1 = False
+        self.__Input0 = False
+        self.__Input1 = False
         self._Output = False
         self._Name = "YaAndGate"
 
@@ -18,8 +18,8 @@ class LogFunc:                      # Klassendeklaration
         print(first_last)
         print(format_string.format("Name", self._Name))
         print(format_string.format("Type", type(self).__name__))
-        print(format_string.format("Input0", str(self._Input0)))
-        print(format_string.format("Input1", str(self._Input1)))
+        print(format_string.format("Input0", str(self.__Input0)))
+        print(format_string.format("Input1", str(self.__Input1)))
         print(format_string.format("Output", str(self._Output)))
         print(first_last)
 
@@ -30,12 +30,12 @@ class LogFunc:                      # Klassendeklaration
         else:
             return "False"
         
-        if self._Input0 == True:
+        if self.__Input0 == True:
             return "True"
         else:
             return "False"
         
-        if self._Input1 == True:
+        if self.__Input1 == True:
             return "True"
         else:
             return "False"
@@ -44,30 +44,30 @@ class LogFunc:                      # Klassendeklaration
     
     @property
     def Input0(self):
-        return self._Input0
+        return self.__Input0
     
     @Input0.setter
     def Input0(self, Input0):
         if isinstance(Input0, bool):
-            self._Input0 = Input0
+            self.__Input0 = Input0
     
     @property
     def Input1(self):
-        return self._Input1
+        return self.__Input1
 
     @Input1.setter
     def Input1(self, Input1):
         if isinstance(Input1, bool):
-            self._Input1 = Input1
+            self.__Input1 = Input1
     
     @property
     def Name(self):
-        return self._Name
+        return self.__Name
 
     @Name.setter
     def Name(self, Name):
         if isinstance(Name, bool):
-            self._Name = Name
+            self.__Name = Name
 
     @property
     def Output(self):
@@ -78,8 +78,8 @@ class AndGate(LogFunc):
     def execute(self):
     # checks if both iputs are true
         self._Output = False
-        if self._Input0 == True:
-            if self._Input1 == True:
+        if self.__Input0 == True:
+            if self.__Input1 == True:
                 self._Output = True
 
  
@@ -88,8 +88,8 @@ class OrGate(LogFunc):
     def execute(self):
     # checks if one of the Iputs is true
         self._Output = False
-        if self._Input0 == True:
+        if self.__Input0 == True:
             self._Output = True
-        elif self._Input1 == True:
+        elif self.__Input1 == True:
             self._Output = True
 
