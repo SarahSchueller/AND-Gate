@@ -104,4 +104,3 @@ class NAndGate(LogFunc):
             else: 
                 self._Output = True
         else: self._Output = True
-
