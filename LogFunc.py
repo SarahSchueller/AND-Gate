@@ -97,10 +97,7 @@ class NAndGate(LogFunc):
    
     def execute(self):
     # checks if both iputs are not true
-        self._Output = False
+        self._Output = True
         if self.Input0 == True:
             if self.Input1 == True:
                 self._Output = False
-            else: 
-                self._Output = True
-        else: self._Output = True
