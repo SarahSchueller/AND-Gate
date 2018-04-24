@@ -67,28 +67,28 @@ class NAndGateTest(unittest.TestCase):
         a.Input0 = False
         a.Input1 = False
         a.execute()
-        self.assertTrue(a.Output, 'Class AndGate: Testcase 1 failed.')
+        self.assertTrue(a.Output, 'Class NAndGate: Testcase 1 failed.')
 
     def testcase_02(self):
         a = NAndGate()
         a.Input0 = True
         a.Input1 = False
         a.execute()
-        self.assertTrue(a.Output, 'Class AndGate: Testcase 2 failed.')
+        self.assertTrue(a.Output, 'Class NAndGate: Testcase 2 failed.')
     
     def testcase_03(self):
         a = NAndGate()
         a.Input0 = False
         a.Input1 = True
         a.execute()
-        self.assertTrue(a.Output, 'Class AndGate: Testcase 3 failed.')
+        self.assertTrue(a.Output, 'Class NAndGate: Testcase 3 failed.')
     
     def testcase_04(self):
         a = NAndGate()
         a.Input0 = True
         a.Input1 = True
         a.execute()
-        self.assertFalse(a.Output, 'Class AndGate: Testcase 4 failed.')
+        self.assertFalse(a.Output, 'Class NAndGate: Testcase 4 failed.')
 
 
 if __name__ == '__main__':
