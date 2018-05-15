@@ -4,6 +4,13 @@ from LogFunc import OrGate
 from LogFunc import NAndGate
 
 class AndGateTest(unittest.TestCase):
+
+    def testcase_00(self):
+        a = AndGate()
+        self.assertFalse(a.Input0, 'Class NAndGate: Testcase 0 failed.')
+        self.assertFalse(a.Input1, 'Class NAndGate: Testcase 0 failed.')
+        self.assertFalse(a.Output, 'Class NAndGate: Testcase 0 failed.')
+
     def testcase_01(self):
         a = AndGate()
         a.Input0 = False
@@ -33,6 +40,13 @@ class AndGateTest(unittest.TestCase):
         self.assertTrue(a.Output, 'Class AndGate: Testcase 4 failed.')
 
 class OrGateTest(unittest.TestCase):
+
+    def testcase_00(self):
+        a = OrGate()
+        self.assertFalse(a.Input0, 'Class NAndGate: Testcase 0 failed.')
+        self.assertFalse(a.Input1, 'Class NAndGate: Testcase 0 failed.')
+        self.assertFalse(a.Output, 'Class NAndGate: Testcase 0 failed.')
+
     def testcase_01(self):
         a = OrGate()
         a.Input0 = False
