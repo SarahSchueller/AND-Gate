@@ -8,6 +8,7 @@ class LogFunc:                      # Klassendeklaration
         self.__Input1 = False
         self._Output = False
         self.__Name = ""
+        self.execute()
 
     def show(self):
     # formate the printed Output
@@ -80,7 +81,6 @@ class AndGate(LogFunc):
 
     def __init__ (self):            # Attribute definieren 
         LogFunc.__init__(self)   
-        self.execute()
         self.__Name = "AndGate"
 
     def execute(self):
@@ -95,7 +95,6 @@ class OrGate(LogFunc):
         
     def __init__ (self):            # Attribute definieren 
         LogFunc.__init__(self)  
-        self.execute()
         self.__Name = "OrGate"
 
     def execute(self):
@@ -110,7 +109,6 @@ class NAndGate(LogFunc):
 
     def __init__ (self):            # Attribute definieren 
         LogFunc.__init__(self)   
-        self.execute()
         self.__Name = "NAndGate"                    
    
     def execute(self):
