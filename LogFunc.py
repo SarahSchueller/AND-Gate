@@ -7,7 +7,7 @@ class LogFunc:                      # Klassendeklaration
         self.__Input0 = False
         self.__Input1 = False
         self._Output = False
-        self.__Name = "YaAndGate"
+        self.__Name = ""
 
     def show(self):
     # formate the printed Output
@@ -39,6 +39,9 @@ class LogFunc:                      # Klassendeklaration
             return "True"
         else:
             return "False"
+
+    def execute(self):
+        raise NotImplementedError
 
     #set Getter and Setter with property
     
@@ -73,8 +76,13 @@ class LogFunc:                      # Klassendeklaration
     def Output(self):
         return self._Output
 
-class AndGate(LogFunc):                     
-   
+class AndGate(LogFunc):  
+
+    def __init__ (self):            # Attribute definieren 
+        LogFunc.__init__(self)   
+        self.execute()
+        self.__Name = "AndGate"
+
     def execute(self):
     # checks if both iputs are true
         self._Output = False
@@ -85,6 +93,11 @@ class AndGate(LogFunc):
  
 class OrGate(LogFunc):                     
         
+    def __init__ (self):            # Attribute definieren 
+        LogFunc.__init__(self)  
+        self.execute()
+        self.__Name = "OrGate"
+
     def execute(self):
     # checks if one of the Iputs is true
         self._Output = False
@@ -93,7 +106,12 @@ class OrGate(LogFunc):
         elif self.Input1 == True:
             self._Output = True
 
-class NAndGate(LogFunc):                     
+class NAndGate(LogFunc): 
+
+    def __init__ (self):            # Attribute definieren 
+        LogFunc.__init__(self)   
+        self.execute()
+        self.__Name = "NAndGate"                    
    
     def execute(self):
     # checks if both iputs are not true

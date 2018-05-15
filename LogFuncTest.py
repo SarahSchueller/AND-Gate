@@ -62,6 +62,13 @@ class OrGateTest(unittest.TestCase):
         self.assertTrue(a.Output, 'Class OrGate: Testcase 4 failed.')
 
 class NAndGateTest(unittest.TestCase):
+
+    def testcase_00(self):
+        a = NAndGate()
+        self.assertFalse(a.Input0, 'Class NAndGate: Testcase 0 failed.')
+        self.assertFalse(a.Input1, 'Class NAndGate: Testcase 0 failed.')
+        self.assertTrue(a.Output, 'Class NAndGate: Testcase 0 failed.')
+
     def testcase_01(self):
         a = NAndGate()
         a.Input0 = False
