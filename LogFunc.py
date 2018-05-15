@@ -41,7 +41,7 @@ class LogFunc:                      # Klassendeklaration
             return "False"
 
     def execute(self):
-        raise NotImplementedError
+        pass
 
     #set Getter and Setter with property
     
