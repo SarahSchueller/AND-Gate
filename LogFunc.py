@@ -47,7 +47,7 @@ class LogFunc(ABC):
     @abstractmethod
     def execute(self):
     # implement logic in childclass
-        pass
+        raise NotImplementedError
 
     #set Getter and Setter with property
     
