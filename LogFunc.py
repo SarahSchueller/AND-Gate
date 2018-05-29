@@ -1,8 +1,11 @@
-__version__ = "1.0"                 # Verwaltungsinfos
+from abc import ABC, abstractmethod
+
+__version__ = "1.0"                 
 __author__ = "Sarah Schüller"
 
-class LogFunc:                      # Klassendeklaration
-    def __init__ (self):            # Attribute definieren    
+# abstract class
+class LogFunc(ABC):                      
+    def __init__ (self):                
     #sets all values to false for initilization
         self.__Input0 = False
         self.__Input1 = False
@@ -41,7 +44,9 @@ class LogFunc:                      # Klassendeklaration
         else:
             return "False"
 
+    @abstractmethod
     def execute(self):
+    # implement logic in childclass
         pass
 
     #set Getter and Setter with property
@@ -79,7 +84,7 @@ class LogFunc:                      # Klassendeklaration
 
 class AndGate(LogFunc):  
 
-    def __init__ (self):            # Attribute definieren 
+    def __init__ (self):             
         LogFunc.__init__(self)   
         self.__Name = "AndGate"
 
@@ -93,7 +98,7 @@ class AndGate(LogFunc):
  
 class OrGate(LogFunc):                     
         
-    def __init__ (self):            # Attribute definieren 
+    def __init__ (self):            
         LogFunc.__init__(self)  
         self.__Name = "OrGate"
 
@@ -107,7 +112,7 @@ class OrGate(LogFunc):
 
 class NAndGate(LogFunc): 
 
-    def __init__ (self):            # Attribute definieren 
+    def __init__ (self):            
         LogFunc.__init__(self)   
         self.__Name = "NAndGate"                    
    
