@@ -5,12 +5,15 @@ __author__ = "Sarah Schüller"
 
 # abstract class
 class LogFunc(ABC):                      
-    def __init__ (self):                
+    def __init__ (self, InputNr, OutputNr):                
     #sets all values to false for initilization
-        self.__Input0 = False
-        self.__Input1 = False
-        self._Output = False
+        self.__Input = []
+        self._Output = []
         self.__Name = ""
+        for x in range(InputNr):
+            self.__Input.append(0)
+        for x in range(OutputNr):
+            self._Output.append(0)
         self.execute()
 
     def show(self):
@@ -22,8 +25,7 @@ class LogFunc(ABC):
         print(first_last)
         print(format_string.format("Name", self.__Name))
         print(format_string.format("Type", type(self).__name__))
-        print(format_string.format("Input0", str(self.__Input0)))
-        print(format_string.format("Input1", str(self.__Input1)))
+        print(format_string.format("Input", str(self.__Input)))
         print(format_string.format("Output", str(self._Output)))
         print(first_last)
 
@@ -34,15 +36,12 @@ class LogFunc(ABC):
         else:
             return "False"
         
-        if self.__Input0 == True:
-            return "True"
-        else:
-            return "False"
-        
-        if self.__Input1 == True:
-            return "True"
-        else:
-            return "False"
+        if isinstance(self.__Input, list):
+            Input = '['
+            for x in range(len.self__Input):
+                Input += self.__Input[x]
+                Input += ' '
+            Input += ']'
 
     @abstractmethod
     def execute(self):
@@ -52,22 +51,12 @@ class LogFunc(ABC):
     #set Getter and Setter with property
     
     @property
-    def Input0(self):
-        return self.__Input0
+    def Input(self):
+        return self.__Input
     
-    @Input0.setter
-    def Input0(self, Input0):
-        if isinstance(Input0, bool):
-            self.__Input0 = Input0
-    
-    @property
-    def Input1(self):
-        return self.__Input1
-
-    @Input1.setter
-    def Input1(self, Input1):
-        if isinstance(Input1, bool):
-            self.__Input1 = Input1
+    def setInput(self, Index, Input):
+        if [0,1].count(Input) == 1 and Index < len(self.__Input):
+            self.__Input[Index] = Input
     
     @property
     def Name(self):
@@ -75,7 +64,7 @@ class LogFunc(ABC):
 
     @Name.setter
     def Name(self, Name):
-        if isinstance(Name, string):
+        if isinstance(Name, str):
             self.__Name = Name
 
     @property
@@ -84,41 +73,37 @@ class LogFunc(ABC):
 
 class AndGate(LogFunc):  
 
-    def __init__ (self):             
-        LogFunc.__init__(self)   
-        self.__Name = "AndGate"
+    def __init__ (self, InputNr):             
+        LogFunc.__init__(self, InputNr, 1)   
+        self.Name = "AndGate"
 
     def execute(self):
     # checks if both iputs are true
-        self._Output = False
-        if self.Input0 == True:
-            if self.Input1 == True:
-                self._Output = True
+        self._Output = 0
+        if self.Input.count(0) == 0:
+            self._Output = 1
 
  
 class OrGate(LogFunc):                     
         
-    def __init__ (self):            
-        LogFunc.__init__(self)  
-        self.__Name = "OrGate"
+    def __init__ (self, InputNr):             
+        LogFunc.__init__(self, InputNr, 1)    
+        self.Name = "OrGate"
 
     def execute(self):
     # checks if one of the Iputs is true
-        self._Output = False
-        if self.Input0 == True:
-            self._Output = True
-        elif self.Input1 == True:
-            self._Output = True
+        self._Output = 0
+        if self.Input.count(1) >= 1:
+            self._Output = 1
 
 class NAndGate(LogFunc): 
 
-    def __init__ (self):            
-        LogFunc.__init__(self)   
-        self.__Name = "NAndGate"                    
+    def __init__ (self, InputNr):             
+        LogFunc.__init__(self, InputNr, 1)    
+        self.Name = "NAndGate"                    
    
     def execute(self):
     # checks if both iputs are not true
-        self._Output = True
-        if self.Input0 == True:
-            if self.Input1 == True:
-                self._Output = False
+        self._Output = 1
+        if self.Input.count(0) == 0:
+            self._Output = 0
