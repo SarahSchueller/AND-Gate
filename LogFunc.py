@@ -140,3 +140,4 @@ class NAndGate(LogFunc):
     def setOutputNr(self, number):
         if number != 1:
             print('The NAndGate must not have more or less than 1 Output.')
+            
