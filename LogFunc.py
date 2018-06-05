@@ -84,7 +84,7 @@ class LogFunc(ABC):
         else:
             print('The Number of Inputs has to greater than 0.')
 
-    def setOutputNr(self, number):
+    def _setOutputNr(self, number):
         if number > 0:
             self._Output = []
             for x in range(number):
@@ -105,9 +105,6 @@ class AndGate(LogFunc):
         if self.Input.count(0) == 0:
             self._Output = 1
 
-    def setOutputNr(self, number):
-        if number != 1:
-            print('The AndGate must not have more or less than 1 Output.')
  
 class OrGate(LogFunc):                     
         
@@ -121,9 +118,6 @@ class OrGate(LogFunc):
         if self.Input.count(1) >= 1:
             self._Output = 1
     
-    def setOutputNr(self, number):
-        if number != 1:
-            print('The OrGate must not have more or less than 1 Output.')
 
 class NAndGate(LogFunc): 
 
@@ -137,7 +131,26 @@ class NAndGate(LogFunc):
         if self.Input.count(0) == 0:
             self._Output = 0
 
-    def setOutputNr(self, number):
-        if number != 1:
-            print('The NAndGate must not have more or less than 1 Output.')
-            
+class NOrGate(LogFunc):                     
+        
+    def __init__ (self, InputNr):             
+        LogFunc.__init__(self, InputNr, 1)    
+        self.Name = "NOrGate"
+
+    def execute(self):
+    # checks if all Iputs are false 
+        self._Output = 0
+        if self.Input.count(1) == 0:
+            self._Output = 1
+
+class XOrGate(LogFunc):                     
+        
+    def __init__ (self, InputNr):             
+        LogFunc.__init__(self, InputNr, 1)    
+        self.Name = "XOrGate"
+
+    def execute(self):
+    # checks if number of true Iputs is   
+        self._Output = 0
+        if  self.Input.count(1) % 2 == 1:
+            self._Output = 1
