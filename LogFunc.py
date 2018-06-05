@@ -29,20 +29,6 @@ class LogFunc(ABC):
         print(format_string.format("Output", str(self._Output)))
         print(first_last)
 
-    def __str__ (self):
-    # turns boolean into string
-        if self._Output == True:
-            return "True"
-        else:
-            return "False"
-        
-        if isinstance(self.__Input, list):
-            Input = '['
-            for x in range(len.self__Input):
-                Input += self.__Input[x]
-                Input += ' '
-            Input += ']'
-
     @abstractmethod
     def execute(self):
     # implement logic in childclass
@@ -150,7 +136,8 @@ class XOrGate(LogFunc):
         self.Name = "XOrGate"
 
     def execute(self):
-    # checks if number of true Iputs is   
+    # checks if number of true Iputs is odd 
         self._Output = 0
         if  self.Input.count(1) % 2 == 1:
             self._Output = 1
+
