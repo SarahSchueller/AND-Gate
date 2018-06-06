@@ -33,9 +33,12 @@ class LogFunc(ABC):
 
     #set Getter and Setter with property
     
-    @property
-    def Input(self):
+
+    def getInput(self):
         return self.__Input
+
+    def getInputElement(self, idx):
+        return self.__Input[idx]
     
     def setInput(self, Index, Input):
         if [0,1].count(Input) == 1 and Index < len(self.__Input) and Index > -1:
@@ -85,7 +88,7 @@ class AndGate(LogFunc):
     def execute(self):
     # checks if both iputs are true
         self._Output = 0
-        if self.Input.count(0) == 0:
+        if self.getInput().count(0) == 0:
             self._Output = 1
 
  
@@ -98,9 +101,8 @@ class OrGate(LogFunc):
     def execute(self):
     # checks if one of the Iputs is true
         self._Output = 0
-        if self.Input.count(1) >= 1:
-            self._Output = 1
-    
+        if self.getInput().count(1) >= 1:
+            self._Output = 1    
 
 class NAndGate(LogFunc): 
 
@@ -111,7 +113,7 @@ class NAndGate(LogFunc):
     def execute(self):
     # checks if both iputs are not true
         self._Output = 1
-        if self.Input.count(0) == 0:
+        if self.getInput().count(0) == 0:
             self._Output = 0
 
 class NOrGate(LogFunc):                     
@@ -123,7 +125,7 @@ class NOrGate(LogFunc):
     def execute(self):
     # checks if all Iputs are false 
         self._Output = 0
-        if self.Input.count(1) == 0:
+        if self.getInput().count(1) == 0:
             self._Output = 1
 
 class XOrGate(LogFunc):                     
@@ -135,6 +137,5 @@ class XOrGate(LogFunc):
     def execute(self):
     # checks if number of true Iputs is odd 
         self._Output = 0
-        if  self.Input.count(1) % 2 == 1:
+        if  self.getInput().count(1) % 2 == 1:
             self._Output = 1
-
