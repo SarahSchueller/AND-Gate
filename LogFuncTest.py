@@ -12,6 +12,7 @@ class AndGateTest(unittest.TestCase):
         for x in range(4):
             self.assertFalse(a.Input[x], 'Class AndGate: Testcase 0 failed.')
         self.assertFalse(a.Output, 'Class AndGate: Testcase 0 failed.')
+        self.assertEqual(len(a.Input), 4, 'Class AndGate: Testcase 4_%s failed.'%(x))
 
     def testcase_01(self):
         for y in range(4):
@@ -65,7 +66,8 @@ class OrGateTest(unittest.TestCase):
         a = OrGate(4)
         for x in range(4):
             self.assertFalse(a.Input[x], 'Class OrGate: Testcase 0 failed.')
-            self.assertFalse(a.Output, 'Class OrGate: Testcase 0 failed.')
+        self.assertFalse(a.Output, 'Class OrGate: Testcase 0 failed.')
+        self.assertEqual(len(a.Input), 4, 'Class OrGate: Testcase 4_%s failed.'%(x))
 
     def testcase_01(self):
         for y in range(4):
@@ -120,6 +122,7 @@ class NAndGateTest(unittest.TestCase):
         for x in range(4):
             self.assertFalse(a.Input[x], 'Class NAndGate: Testcase 0 failed.')
         self.assertTrue(a.Output, 'Class NAndGate: Testcase 0 failed.')
+        self.assertEqual(len(a.Input), 4, 'Class NAndGate: Testcase 4_%s failed.'%(x))
 
     def testcase_01(self):
         for y in range(4):
@@ -174,6 +177,7 @@ class NOrGateTest(unittest.TestCase):
         for x in range(4):
             self.assertFalse(a.Input[x], 'Class NOrGate: Testcase 0 failed.')
         self.assertTrue(a.Output, 'Class NOrGate: Testcase 0 failed.')
+        self.assertEqual(len(a.Input), 4, 'Class NOrGate: Testcase 4_%s failed.'%(x))
 
     def testcase_01(self):
         for y in range(4):
@@ -228,6 +232,7 @@ class XOrGateTest(unittest.TestCase):
         for x in range(4):
             self.assertFalse(a.Input[x], 'Class XOrGate: Testcase 0 failed.')
         self.assertFalse(a.Output, 'Class XOrGate: Testcase 0 failed.')
+        self.assertEqual(len(a.Input), 4, 'Class XOrGate: Testcase 4_%s failed.'%(x))
 
     def testcase_01(self):
         for y in range(4):
