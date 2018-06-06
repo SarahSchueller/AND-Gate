@@ -27,23 +27,6 @@ class LogFunc(ABC):
         print(format_string.format("Output", str(self._Output)))
         print(first_last)
 
-    def __str__ (self):
-    # turns boolean into string
-        if self._Output == True:
-            return "True"
-        else:
-            return "False"
-        
-        if self.__Input0 == True:
-            return "True"
-        else:
-            return "False"
-        
-        if self.__Input1 == True:
-            return "True"
-        else:
-            return "False"
-
     @abstractmethod
     def execute(self):
     # implement logic in childclass
@@ -75,7 +58,7 @@ class LogFunc(ABC):
 
     @Name.setter
     def Name(self, Name):
-        if isinstance(Name, string):
+        if isinstance(Name, str):
             self.__Name = Name
 
     @property
@@ -91,24 +74,8 @@ class AndGate(LogFunc):
     def execute(self):
     # checks if both iputs are true
         self._Output = False
-        if self.Input0 == True:
-            if self.Input1 == True:
-                self._Output = True
-
- 
-class OrGate(LogFunc):                     
-        
-    def __init__ (self):            
-        LogFunc.__init__(self)  
-        self.__Name = "OrGate"
-
-    def execute(self):
-    # checks if one of the Iputs is true
-        self._Output = False
-        if self.Input0 == True:
-            self._Output = True
-        elif self.Input1 == True:
-            self._Output = True
+        if self.Input0 == self.Input1 ==  True:
+            self._Output = True 
 
 class NAndGate(LogFunc): 
 
@@ -119,6 +86,41 @@ class NAndGate(LogFunc):
     def execute(self):
     # checks if both iputs are not true
         self._Output = True
-        if self.Input0 == True:
-            if self.Input1 == True:
-                self._Output = False
+        if self.Input0 == self.Input1 == True:
+            self._Output = False
+
+class OrGate(LogFunc):                     
+        
+    def __init__ (self):            
+        LogFunc.__init__(self)  
+        self.__Name = "OrGate"
+
+    def execute(self):
+    # checks if one of the Iputs is true
+        self._Output = True
+        if self.Input0 == self.Input1 == False:
+            self._Output = False
+
+class NOrGate(LogFunc):                     
+        
+    def __init__ (self):            
+        LogFunc.__init__(self)  
+        self.__Name = "NOrGate"
+
+    def execute(self):
+    # checks if one of the Iputs is true
+        self._Output = False
+        if self.Input0 == self.Input1 == False:
+            self._Output = True
+
+class XOrGate(LogFunc):                     
+        
+    def __init__ (self):            
+        LogFunc.__init__(self)  
+        self.__Name = "XOrGate"
+
+    def execute(self):
+    # checks if one of the Iputs is true
+        self._Output = False
+        if self.Input0 != self.Input1:
+            self._Output = True
