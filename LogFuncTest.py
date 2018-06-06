@@ -53,13 +53,19 @@ class AndGateTest(unittest.TestCase):
         a.execute()
         self.assertTrue(a.Output, 'Class AndGate: Testcase 4 failed.')
 
+    def testcase_05(self):
+        a = AndGate(4)
+        for x in range(5):
+            a.setInputNr(x)
+            self.assertEqual(len(a.Input),x, 'Class AndGate: Testcase 4_%s failed.'%(x))
+
 class OrGateTest(unittest.TestCase):
 
     def testcase_00(self):
         a = OrGate(4)
         for x in range(4):
             self.assertFalse(a.Input[x], 'Class OrGate: Testcase 0 failed.')
-        self.assertFalse(a.Output, 'Class OrGate: Testcase 0 failed.')
+            self.assertFalse(a.Output, 'Class OrGate: Testcase 0 failed.')
 
     def testcase_01(self):
         for y in range(4):
@@ -100,6 +106,12 @@ class OrGateTest(unittest.TestCase):
             a.setInput(x, 1)
         a.execute()
         self.assertTrue(a.Output, 'Class OrGate: Testcase 4 failed.')
+
+    def testcase_05(self):
+        a = OrGate(4)
+        for x in range(5):
+            a.setInputNr(x)
+            self.assertEqual(len(a.Input),x, 'Class OrGate: Testcase 4_%s failed.'%(x))
 
 class NAndGateTest(unittest.TestCase):
 
@@ -149,6 +161,12 @@ class NAndGateTest(unittest.TestCase):
         a.execute()
         self.assertFalse(a.Output, 'Class NAndGate: Testcase 4 failed.')
 
+    def testcase_05(self):
+        a = NAndGate(4)
+        for x in range(5):
+            a.setInputNr(x)
+            self.assertEqual(len(a.Input),x, 'Class NAndGate: Testcase 4_%s failed.'%(x))
+
 class NOrGateTest(unittest.TestCase):
 
     def testcase_00(self):
@@ -196,6 +214,12 @@ class NOrGateTest(unittest.TestCase):
             a.setInput(x, 1)
         a.execute()
         self.assertFalse(a.Output, 'Class NOrGate: Testcase 4 failed.')
+
+    def testcase_05(self):
+        a = NOrGate(4)
+        for x in range(5):
+            a.setInputNr(x)
+            self.assertEqual(len(a.Input),x, 'Class NOrGate: Testcase 4_%s failed.'%(x))
 
 class XOrGateTest(unittest.TestCase):
 
@@ -245,7 +269,11 @@ class XOrGateTest(unittest.TestCase):
         a.execute()
         self.assertFalse(a.Output, 'Class XOrGate: Testcase 4 failed.')
 
-
+    def testcase_05(self):
+        a = XOrGate(4)
+        for x in range(5):
+            a.setInputNr(x)
+            self.assertEqual(len(a.Input),x, 'Class XOrGate: Testcase 4_%s failed.'%(x))
 
 if __name__ == '__main__':
     unittest.main()             # führt automatisch alle Methoden aus, die mit testcase_ beginnen
