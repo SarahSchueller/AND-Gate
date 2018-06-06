@@ -10,11 +10,8 @@ class LogFunc(ABC):
         self.__Input = []
         self._Output = []
         self.__Name = ""
-        for x in range(InputNr):
-            self.__Input.append(0)
-        for x in range(OutputNr):
-            self._Output.append(0)
-        self.execute()
+        self.setInputNr(InputNr)
+        self._setOutputNr(OutputNr)
 
     def show(self):
     # formate the printed Output
@@ -62,7 +59,7 @@ class LogFunc(ABC):
         return self._Output
 
     def setInputNr(self, number):
-        if number > 0:
+        if number > -1:
             self.__Input = []
             for x in range(number):
                 self.__Input.append(0)
