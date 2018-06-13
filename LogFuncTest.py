@@ -365,7 +365,14 @@ class FullAdderTest(unittest.TestCase):
 
 class EightBitAdderTest(unittest.TestCase):
 
-    def testcase_00(self):
+    def testcase_00(self):   
+        a = EightBitAdder()
+        for x in range(16):
+            self.assertFalse(a.getInputElement(x), 'Class EightBitAdder: Testcase 0 failed.')
+        for x in range(9):
+            self.assertFalse(a.getOutputElement(x), 'Class EightBitAdder: Testcase 0 failed.')
+
+    def testcase_01(self):
 
         for x in range(1000):
             a = EightBitAdder()
@@ -390,7 +397,7 @@ class EightBitAdderTest(unittest.TestCase):
             Sum = int(Number1, 2)+int(Number2, 2)
             Result = int(Total, 2)
             
-            self.assertEqual(Result, Sum, 'Class EightBitAdder: Testcase 1_%s failed.'%(x))
+            self.assertEqual(Result, Sum, 'Class EightBitAdder: Testcase 01_%s failed.'%(x))
 
 
 if __name__ == '__main__':
