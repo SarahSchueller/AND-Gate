@@ -7,11 +7,12 @@ __author__ = "Sarah Schüller"
 class LogFunc(ABC):                      
     def __init__ (self, InputNr, OutputNr):                
     #sets all values to false for initilization
-        self.__Input = []
+        self._Input = []
         self._Output = []
         self.__Name = ""
-        self.setInputNr(InputNr)
+        self._setInputNr(InputNr)
         self._setOutputNr(OutputNr)
+        self.execute()
 
     def show(self):
     # formate the printed Output
@@ -22,7 +23,7 @@ class LogFunc(ABC):
         print(first_last)
         print(format_string.format("Name", self.__Name))
         print(format_string.format("Type", type(self).__name__))
-        print(format_string.format("Input", str(self.__Input)))
+        print(format_string.format("Input", str(self._Input)))
         print(format_string.format("Output", str(self._Output)))
         print(first_last)
 
@@ -35,19 +36,49 @@ class LogFunc(ABC):
     
 
     def getInput(self):
-        return self.__Input
+        return self._Input
 
     def getInputElement(self, idx):
-        return self.__Input[idx]
+        return self._Input[idx]
     
     def setInput(self, Index, Input):
-        if [0,1].count(Input) == 1 and Index < len(self.__Input) and Index > -1:
-            self.__Input[Index] = Input
-        elif Index > len(self.__Input) or  Index < 0:
-            print('The given idex is not correct please choose an index between 0 and',len(self.__Input))
+        if [0,1].count(Input) == 1 and Index < len(self._Input) and Index > -1:
+            self._Input[Index] = Input
+        elif Index > len(self._Input) or  Index < 0:
+            raise ValueError('The given index is not correct please choose an index between 0 and',len(self._Input))
         elif [0,1].count(Input) != 1:
-            print('Please choose 0 or 1 for false or true as value')
+            raise ValueError('Please choose 0 or 1 for false or true as value')
     
+    def getOutput(self):
+        return self._Output
+
+    def getOutputElement(self, idx):
+        return self._Output[idx]
+
+    def _setOutput(self, Index, Output):
+        if [0,1].count(Output) == 1 and Index < len(self._Output) and Index > -1:
+            self._Output[Index] = Output
+        elif Index > len(self._Output) or  Index < 0:
+            raise ValueError('The given index is not correct please choose an index between 0 and',len(self._Input))
+        elif [0,1].count(Output) != 1:
+            raise ValueError('Please choose 0 or 1 for false or true as value')
+
+    def _setInputNr(self, number):
+        if number > -1:
+            self._Input = []
+            for x in range(number):
+                self._Input.append(0)
+        else:
+            raise ValueError('The Number of Inputs has to greater than 0.')
+
+    def _setOutputNr(self, number):
+        if number > 0:
+            self._Output = []
+            for x in range(number):
+                self._Output.append(0)
+        else:
+            raise ValueError('The Number of Outputs has to greater than 0.')
+
     @property
     def Name(self):
         return self.__Name
@@ -57,85 +88,221 @@ class LogFunc(ABC):
         if isinstance(Name, str):
             self.__Name = Name
 
-    @property
-    def Output(self):
-        return self._Output
-
-    def setInputNr(self, number):
-        if number > -1:
-            self.__Input = []
-            for x in range(number):
-                self.__Input.append(0)
-            self.execute()
-        else:
-            print('The Number of Inputs has to greater than 0.')
-
-    def _setOutputNr(self, number):
-        if number > 0:
-            self._Output = []
-            for x in range(number):
-                self._Output.append(0)
-            self.execute()
-        else:
-            print('The Number of Outputs has to greater than 0.')
-
 class AndGate(LogFunc):  
 
-    def __init__ (self, InputNr):             
+    def __init__ (self, InputNr): 
+        if InputNr < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+  
         LogFunc.__init__(self, InputNr, 1)   
         self.Name = "AndGate"
 
     def execute(self):
     # checks if both iputs are true
-        self._Output = 0
+        self._setOutput(0,0)
         if self.getInput().count(0) == 0:
-            self._Output = 1
+            self._setOutput(0,1)
+
+    def setInputNr(self, number):
+        if number < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        else:
+            self._setInputNr(number)
+            self.execute()
 
  
 class OrGate(LogFunc):                     
         
-    def __init__ (self, InputNr):             
+    def __init__ (self, InputNr):
+        if InputNr < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+       
         LogFunc.__init__(self, InputNr, 1)    
         self.Name = "OrGate"
 
     def execute(self):
     # checks if one of the Iputs is true
-        self._Output = 0
+        self._setOutput(0,0)
         if self.getInput().count(1) >= 1:
-            self._Output = 1    
+            self._setOutput(0,1) 
+
+    def setInputNr(self, number):
+        if number < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        else:
+            self._setInputNr(number)
+            self.execute()   
 
 class NAndGate(LogFunc): 
 
-    def __init__ (self, InputNr):             
+    def __init__ (self, InputNr):  
+        if InputNr < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+      
         LogFunc.__init__(self, InputNr, 1)    
         self.Name = "NAndGate"                    
    
     def execute(self):
     # checks if both iputs are not true
-        self._Output = 1
+        self._setOutput(0,1)
         if self.getInput().count(0) == 0:
-            self._Output = 0
+            self._setOutput(0,0)
+
+    def setInputNr(self, number):
+        if number < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        else:
+            self._setInputNr(number)
+            self.execute() 
 
 class NOrGate(LogFunc):                     
         
-    def __init__ (self, InputNr):             
+    def __init__ (self, InputNr):
+        if InputNr < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        
         LogFunc.__init__(self, InputNr, 1)    
         self.Name = "NOrGate"
 
     def execute(self):
     # checks if all Iputs are false 
-        self._Output = 0
+        self._setOutput(0,0)
         if self.getInput().count(1) == 0:
-            self._Output = 1
+            self._setOutput(0,1)
+
+    def setInputNr(self, number):
+        if number < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        else:
+            self._setInputNr(number) 
+            self.execute()
 
 class XOrGate(LogFunc):                     
         
-    def __init__ (self, InputNr):             
+    def __init__ (self, InputNr):
+        if InputNr < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        
         LogFunc.__init__(self, InputNr, 1)    
         self.Name = "XOrGate"
 
     def execute(self):
     # checks if number of true Iputs is odd 
-        self._Output = 0
+        self._setOutput(0,0)
         if  self.getInput().count(1) % 2 == 1:
-            self._Output = 1
+            self._setOutput(0,1)
+
+    def setInputNr(self, number):
+        if number < 2:
+            raise ValueError('There must be minimum 2 Inputs.') 
+        else:
+            self._setInputNr(number) 
+            self.execute()
+
+class HalfAdder(LogFunc):
+
+    def __init__(self):
+        self.__sum = XOrGate(2)
+        self.__sum.Name = "sum"
+        self.__carry = AndGate(2)
+        self.__carry.Name = "carry"
+        LogFunc.__init__(self, 2, 2)
+        self.Name = "HalfAdder"
+
+    def execute(self):
+
+        self.__sum.setInput(0, self.getInputElement(0))
+        self.__sum.setInput(1, self.getInputElement(1))
+
+        self.__carry.setInput(0, self.getInputElement(0))
+        self.__carry.setInput(1, self.getInputElement(1))
+
+        self.__sum.execute()
+        self.__carry.execute()
+
+        self._setOutput(0, self.__carry.getOutputElement(0))
+        self._setOutput(1, self.__sum.getOutputElement(0))
+
+
+class FullAdder(LogFunc):
+
+    def __init__(self):
+        self.__sum = [HalfAdder(), HalfAdder()]
+        self.__sum[0].Name = "sum1"
+        self.__sum[1].Name = "sum2"
+        self.__carry = OrGate(2)
+        self.__carry.Name = "carry"
+        LogFunc.__init__(self, 3, 2)
+        self.Name = "FullAdder"
+
+    def execute(self):
+
+        self.__sum[0].setInput(0, self.getInputElement(0))
+        self.__sum[0].setInput(1, self.getInputElement(1))
+        self.__sum[0].execute()
+
+        self.__sum[1].setInput(0, self.getInputElement(2))
+        self.__sum[1].setInput(1, self.__sum[0].getOutputElement(1))
+        self.__sum[1].execute()
+
+        self.__carry.setInput(0, self.__sum[0].getOutputElement(0))
+        self.__carry.setInput(1, self.__sum[1].getOutputElement(0))
+        self.__carry.execute()
+
+        self._setOutput(0, self.__carry.getOutputElement(0))
+        self._setOutput(1, self.__sum[1].getOutputElement(1))
+
+class EightBitAdder(LogFunc):
+
+    def __init__(self):
+        self.__sum = HalfAdder()
+        self.__sum.Name = "sum"
+        self.__carry = [FullAdder(), FullAdder(), FullAdder(), FullAdder(), FullAdder(), FullAdder(), FullAdder()]
+        for x in range(7):
+            self.__carry[x].Name = "carry%s"%(x)
+        LogFunc.__init__(self, 16, 9)
+        self.Name = "EightBitAdder"
+
+    def execute(self):    
+        self.__sum.setInput(0, self.getInputElement(7))
+        self.__sum.setInput(1, self.getInputElement(15))
+        self.__sum.execute()
+        self._setOutput(8, self.__sum.getOutputElement(1))
+
+        self.__carry[0].setInput(0, self.getInputElement(6))
+        self.__carry[0].setInput(1, self.getInputElement(14))
+        self.__carry[0].setInput(2, self.__sum.getOutputElement(0))
+        self.__carry[0].execute()
+        self._setOutput(7, self.__carry[0].getOutputElement(1))
+
+        for x in range(1, 7):
+            self.__carry[x].setInput(0, self.getInputElement(6-x))
+            self.__carry[x].setInput(1, self.getInputElement(14-x))
+            self.__carry[x].setInput(2, self.__carry[x-1].getOutputElement(0))
+            self.__carry[x].execute()
+            self._setOutput(7-x, self.__carry[x].getOutputElement(1))
+        
+        self._setOutput(0, self.__carry[6].getOutputElement(0))
+
+    def show(self):
+    # formate the printed Output
+        cwidth = 50
+        first_last = ''.ljust(cwidth, '-')
+        format_string = "-- {{0:10}}: {{1:{0}}} --".format(cwidth-18)
+
+        Number1 = []
+        Number2 = []
+
+        for x in range(8):
+            Number1.append(self.getInputElement(x))
+
+        for x in range(8, 16):
+            Number2.append(self.getInputElement(x))
+
+        print(first_last)
+        print(format_string.format("Name", self.Name))
+        print(format_string.format("Type", type(self).__name__))
+        print(format_string.format("Number1", str(Number1)))
+        print(format_string.format("Number2", str(Number2)))
+        print(format_string.format("Total", str(self._Output)))
+        print(first_last)
