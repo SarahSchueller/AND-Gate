@@ -98,7 +98,7 @@ class AndGate(LogFunc):
         self.Name = "AndGate"
 
     def execute(self):
-    # checks if both iputs are true
+    # checks if all iputs are true
         self._setOutput(0,0)
         if self.getInput().count(0) == 0:
             self._setOutput(0,1)
