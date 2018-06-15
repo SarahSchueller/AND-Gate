@@ -121,7 +121,7 @@ class OrGate(LogFunc):
         self.Name = "OrGate"
 
     def execute(self):
-    # checks if one of the Iputs is true
+    # checks if all Iputs are true
         self._setOutput(0,0)
         if self.getInput().count(1) >= 1:
             self._setOutput(0,1) 
