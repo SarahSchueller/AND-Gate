@@ -44,7 +44,7 @@ class LogFunc(ABC):
     def setInput(self, Index, Input):
         if [0,1].count(Input) == 1 and Index < len(self._Input) and Index > -1:
             self._Input[Index] = Input
-        elif Index > len(self._Input) or  Index < 0:
+        elif Index > len(self._Input)-1 or  Index < 0:
             raise ValueError('The given index is not correct please choose an index between 0 and',len(self._Input))
         elif [0,1].count(Input) != 1:
             raise ValueError('Please choose 0 or 1 for false or true as value')
@@ -58,7 +58,7 @@ class LogFunc(ABC):
     def _setOutput(self, Index, Output):
         if [0,1].count(Output) == 1 and Index < len(self._Output) and Index > -1:
             self._Output[Index] = Output
-        elif Index > len(self._Output) or  Index < 0:
+        elif Index > len(self._Output)-1 or  Index < 0:
             raise ValueError('The given index is not correct please choose an index between 0 and',len(self._Input))
         elif [0,1].count(Output) != 1:
             raise ValueError('Please choose 0 or 1 for false or true as value')
