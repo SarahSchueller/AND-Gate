@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+from show import *
 __version__ = "1.0"                 
 __author__ = "Sarah Schüller"
 
@@ -8,32 +8,22 @@ class LogFunc(ABC):
     def __init__ (self, InputNr, OutputNr):                
     #sets all values to false for initilization
         self._Input = []
-        self._Output = []
+        self._Output = [] 
         self.__Name = ""
+        self._showType = showStandard()
         self._setInputNr(InputNr)
         self._setOutputNr(OutputNr)
         self.execute()
 
     def show(self):
-    # formate the printed Output
-        cwidth = 50
-        first_last = ''.ljust(cwidth, '-')
-        format_string = "-- {{0:10}}: {{1:{0}}} --".format(cwidth-18)
-
-        print(first_last)
-        print(format_string.format("Name", self.__Name))
-        print(format_string.format("Type", type(self).__name__))
-        print(format_string.format("Input", str(self._Input)))
-        print(format_string.format("Output", str(self._Output)))
-        print(first_last)
+        self.getShowType().show(self.Name, type(self).__name__, self.getInput(), self.getOutput())
 
     @abstractmethod
     def execute(self):
     # implement logic in childclass
         raise NotImplementedError
 
-    #set Getter and Setter with property
-    
+    #set Getter and Setter 
 
     def getInput(self):
         return self._Input
@@ -45,7 +35,7 @@ class LogFunc(ABC):
         if [0,1].count(Input) == 1 and Index < len(self._Input) and Index > -1:
             self._Input[Index] = Input
         elif Index > len(self._Input)-1 or  Index < 0:
-            raise ValueError('The given index is not correct please choose an index between 0 and'+str(len(self._Input)-1))
+            raise ValueError('The given index is not correct please choose an index between 0 and '+str(len(self._Input)-1))
         elif [0,1].count(Input) != 1:
             raise ValueError('Please choose 0 or 1 for false or true as value')
     
@@ -59,7 +49,7 @@ class LogFunc(ABC):
         if [0,1].count(Output) == 1 and Index < len(self._Output) and Index > -1:
             self._Output[Index] = Output
         elif Index > len(self._Output)-1 or  Index < 0:
-            raise ValueError('The given index is not correct please choose an index between 0 and'+str(len(self._Output)-1))
+            raise ValueError('The given index is not correct please choose an index between 0 and '+str(len(self._Output)-1))
         elif [0,1].count(Output) != 1:
             raise ValueError('Please choose 0 or 1 for false or true as value')
 
@@ -69,7 +59,7 @@ class LogFunc(ABC):
             for x in range(number):
                 self._Input.append(0)
         else:
-            raise ValueError('The Number of Inputs has to greater than 0.')
+            raise ValueError('The Number of Inputs has to be greater than -1.')
 
     def _setOutputNr(self, number):
         if number > 0:
@@ -77,7 +67,13 @@ class LogFunc(ABC):
             for x in range(number):
                 self._Output.append(0)
         else:
-            raise ValueError('The Number of Outputs has to greater than 0.')
+            raise ValueError('The Number of Outputs has to greater be than 0.')
+
+    def getShowType(self):
+        return self._showType
+    
+    def setShowType(self, showType):
+        self._showType = showType
 
     @property
     def Name(self):
@@ -87,6 +83,7 @@ class LogFunc(ABC):
     def Name(self, Name):
         if isinstance(Name, str):
             self.__Name = Name
+
 
 class AndGate(LogFunc):  
 
@@ -98,7 +95,7 @@ class AndGate(LogFunc):
         self.Name = "AndGate"
 
     def execute(self):
-    # checks if all iputs are true
+    # checks if both iputs are true
         self._setOutput(0,0)
         if self.getInput().count(0) == 0:
             self._setOutput(0,1)
@@ -121,7 +118,7 @@ class OrGate(LogFunc):
         self.Name = "OrGate"
 
     def execute(self):
-    # checks if all Iputs are true
+    # checks if one of the Iputs is true
         self._setOutput(0,0)
         if self.getInput().count(1) >= 1:
             self._setOutput(0,1) 
@@ -132,6 +129,7 @@ class OrGate(LogFunc):
         else:
             self._setInputNr(number)
             self.execute()   
+
 
 class NAndGate(LogFunc): 
 
@@ -155,6 +153,7 @@ class NAndGate(LogFunc):
             self._setInputNr(number)
             self.execute() 
 
+
 class NOrGate(LogFunc):                     
         
     def __init__ (self, InputNr):
@@ -177,6 +176,7 @@ class NOrGate(LogFunc):
             self._setInputNr(number) 
             self.execute()
 
+
 class XOrGate(LogFunc):                     
         
     def __init__ (self, InputNr):
@@ -198,6 +198,7 @@ class XOrGate(LogFunc):
         else:
             self._setInputNr(number) 
             self.execute()
+
 
 class HalfAdder(LogFunc):
 
@@ -259,7 +260,7 @@ class EightBitAdder(LogFunc):
         self.__sum.Name = "sum"
         self.__carry = [FullAdder(), FullAdder(), FullAdder(), FullAdder(), FullAdder(), FullAdder(), FullAdder()]
         for x in range(7):
-            self.__carry[x].Name = "carry%s"%(x)
+            self.__carry[x].Name = "carry{}".format(x)
         LogFunc.__init__(self, 16, 9)
         self.Name = "EightBitAdder"
 
@@ -283,26 +284,3 @@ class EightBitAdder(LogFunc):
             self._setOutput(7-x, self.__carry[x].getOutputElement(1))
         
         self._setOutput(0, self.__carry[6].getOutputElement(0))
-
-    def show(self):
-    # formate the printed Output
-        cwidth = 50
-        first_last = ''.ljust(cwidth, '-')
-        format_string = "-- {{0:10}}: {{1:{0}}} --".format(cwidth-18)
-
-        Number1 = []
-        Number2 = []
-
-        for x in range(8):
-            Number1.append(self.getInputElement(x))
-
-        for x in range(8, 16):
-            Number2.append(self.getInputElement(x))
-
-        print(first_last)
-        print(format_string.format("Name", self.Name))
-        print(format_string.format("Type", type(self).__name__))
-        print(format_string.format("Number1", str(Number1)))
-        print(format_string.format("Number2", str(Number2)))
-        print(format_string.format("Total", str(self._Output)))
-        print(first_last)
