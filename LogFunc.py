@@ -16,7 +16,7 @@ class LogFunc(ABC):
         self.execute()
 
     def show(self):
-        self.getShowType().show(self.Name, type(self).__name__, self.getInput(), self.getOutput())
+        self.getShowType().show(self)
 
     @abstractmethod
     def execute(self):

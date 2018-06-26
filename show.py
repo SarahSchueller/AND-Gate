@@ -3,13 +3,18 @@ from abc import ABC, abstractmethod, ABCMeta
 class showType(metaclass=ABCMeta):
 
     @abstractmethod
-    def show(self, Name, Type, Input, Output):
+    def show(self, Logfunc):
         pass
 
 class showStandard(showType):
 
-    def show(self, Name, Type, Input, Output):
+    def show(self, Logfunc):
     # formate the printed Output
+        Name = Logfunc.Name
+        Input = Logfunc.getInput()
+        Output = Logfunc.getOutput()
+        Type = type(Logfunc).__name__
+
 
         Length = [len(Output)*3 + 23, len(Input)*3 + 23, len(Name) + 23, len(Type) + 23, len('Standard') + 6]
         Length.sort(key=int, reverse=True)
@@ -49,7 +54,14 @@ class showStandard(showType):
 
 class showAddition(showType):
 
-    def show(self, Name, Type, Input, Output):
+
+    def show(self, Logfunc):
+        
+        Name = Logfunc.Name
+        Input = Logfunc.getInput()
+        Output = Logfunc.getOutput()
+        Type = type(Logfunc).__name__
+
         if len(Output)>1:
             Number = int(len(Input)/(len(Output)-1))
         else:
@@ -100,7 +112,14 @@ class showAddition(showType):
 
 class showDecimal(showType):
 
-    def show(self, Name, Type, Input, Output):
+
+    def show(self, Logfunc):
+
+        Name = Logfunc.Name
+        Input = Logfunc.getInput()
+        Output = Logfunc.getOutput()
+        Type = type(Logfunc).__name__
+
         if len(Output)>1:
             Number = int(len(Input)/(len(Output)-1))
         else:
@@ -149,7 +168,14 @@ class showDecimal(showType):
 
 class showGate(showType):
 
-    def show(self, Name, Type, Input, Output):
+
+    def show(self, Logfunc):
+
+        Name = Logfunc.Name
+        Input = Logfunc.getInput()
+        Output = Logfunc.getOutput()
+        Type = type(Logfunc).__name__
+
         if len(Output)>1:
             Number = int(len(Input)/(len(Output)-1))
         else:
